@@ -89,4 +89,4 @@ I pledge my honor that I have abided by the Stevens Honor System.
 
 I learned that sometimes programs come in differently than I would've initially wanted to function to be set up. I realized that it is more important to fix whats given, than to create a new solution because of the overhead that gives when working with larger systems.
 
-[![<KensayS>](https://circleci.com/gh/<KensayS>/<Triangle567>.svg?style=svg)](https://app.circleci.com/pipelines/github/<KensayS>/<Triangle567>?branch=main&filter=all)
+[![KensayS](https://circleci.com/gh/KensayS/Triangle567.svg?style=svg)](https://app.circleci.com/pipelines/github/KensayS/Triangle567?branch=main&filter=all)
