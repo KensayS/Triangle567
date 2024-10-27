@@ -3,53 +3,38 @@
 Created on Thu Jan 14 13:44:00 2016
 Updated Jan 21, 2018
 
-The primary goal of this file is to demonstrate a simple python program to classify triangles
+The primary goal of this file is to demonstrate a simple Python program to classify triangles.
 
 @author: jrr
 @author: rk
 """
 
-def classifyTriangle(a,b,c):
+def classify_triangle(a, b, c):
     """
-    Your correct code goes here...  Fix the faulty logic below until the code passes all of 
-    you test cases. 
-    
-    This function returns a string with the type of triangle from three integer values
-    corresponding to the lengths of the three sides of the Triangle.
-    
-    return:
-        If all three sides are equal, return 'Equilateral'
-        If exactly one pair of sides are equal, return 'Isoceles'
-        If no pair of  sides are equal, return 'Scalene'
-        If not a valid triangle, then return 'NotATriangle'
-        If the sum of any two sides equals the squate of the third side, then return 'Right'
-      
-      BEWARE: there may be a bug or two in this code
+    Classifies a triangle given the lengths of its three sides.
+
+    Args:
+        a, b, c (int): Lengths of the triangle's sides.
+
+    Returns:
+        str: The type of triangle: 'Equilateral', 'Isosceles', 'Scalene', 'Right', 'NotATriangle', 
+             or 'InvalidInput'.
     """
-    # require that the input values be >= 0 and <= 200
-    if a > 200 or b > 200 or c > 200:
+    # Ensure all inputs are integers within a valid range
+    if not all(isinstance(x, int) and 0 < x <= 200 for x in (a, b, c)):
         return 'InvalidInput'
-        
-    if a <= 0 or b <= 0 or c <= 0:
-        return 'InvalidInput'
-    
-    # verify that all 3 inputs are integers  
-    if not(isinstance(a,int) and isinstance(b,int) and isinstance(c,int)):
-        return 'InvalidInput'
-    
+
     # Sort the sides so that c is always the largest
-    a, b, c = sorted([a, b, c])
-    
-    # the sum of any two sides must be greater than the third side
-    if (a + b <= c):
+    a, b, c = sorted((a, b, c))
+
+    # Check for the triangle inequality
+    if a + b <= c:
         return 'NotATriangle'
-    
-    # now we know that we have a valid triangle 
-    if a == b and b == c:
+
+    # Determine the type of triangle
+    if a == b == c:
         return 'Equilateral'
-    elif (a**2 + b**2 == c**2):
+    if a**2 + b**2 == c**2:
         return 'Right'
-    elif a != b and b != c:
-        return 'Scalene'
-    else:
-        return 'Isosceles'
+
+    return 'Scalene' if len({a, b, c}) == 3 else 'Isosceles'

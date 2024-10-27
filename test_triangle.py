@@ -9,7 +9,7 @@ The primary goal of this file is to demonstrate a simple unittest implementation
 
 import unittest
 
-from Triangle import classifyTriangle
+from triangle import classifyTriangle
 
 # This code implements the unit test functionality
 # https://docs.python.org/3/library/unittest.html has a nice description of the framework
@@ -51,30 +51,6 @@ class TestTriangles(unittest.TestCase):
     def test_invalid_4(self):
         self.assertEqual(classifyTriangle(1, 10, 12), 'NotATriangle', '1,10,12 should be invalid')
 
-    def test_non_numeric_1(self):
-        with self.assertRaises(TypeError):
-            classifyTriangle('a', 3, 4)
-
-    def test_non_numeric_2(self):
-        with self.assertRaises(TypeError):
-            classifyTriangle(3, 'b', 5)
-
-    def test_non_numeric_3(self):
-        with self.assertRaises(TypeError):
-            classifyTriangle(3, 4, 'c')
-
-    def test_non_numeric_4(self):
-        with self.assertRaises(TypeError):
-            classifyTriangle([1, 2, 3], 4, 5)
-
-    def test_non_numeric_5(self):
-        with self.assertRaises(TypeError):
-            classifyTriangle(None, 4, 5)
-
-    def test_non_numeric_6(self):
-        with self.assertRaises(TypeError):
-            classifyTriangle(3.0, "4.0", 5.0)
-
     def test_triangle_inequality_1(self):
         self.assertEqual(classifyTriangle(10, 1, 1), 'NotATriangle', '10,1,1 should be invalid due to triangle inequality')
 
@@ -83,6 +59,28 @@ class TestTriangles(unittest.TestCase):
 
     def test_triangle_inequality_3(self):
         self.assertEqual(classifyTriangle(1, 1, 10), 'NotATriangle', '1,1,10 should be invalid due to triangle inequality')
+    
+    def test_side_too_large_1(self):
+        self.assertEqual(classifyTriangle(201, 100, 100), 'InvalidInput', '201,100,100 should be invalid due to side > 200')
+
+    def test_side_too_large_2(self):
+        self.assertEqual(classifyTriangle(100, 201, 100), 'InvalidInput', '100,201,100 should be invalid due to side > 200')
+
+    def test_side_too_large_3(self):
+        self.assertEqual(classifyTriangle(100, 100, 201), 'InvalidInput', '100,100,201 should be invalid due to side > 200')
+
+    def test_side_too_large_all(self):
+        self.assertEqual(classifyTriangle(201, 201, 201), 'InvalidInput', '201,201,201 should be invalid due to all sides > 200')
+
+    def test_non_integer_float(self):
+        self.assertEqual(classifyTriangle(3.5, 4, 5), 'InvalidInput', '3.5,4,5 should be invalid because 3.5 is not an integer')
+
+    def test_non_integer_string(self):
+        self.assertEqual(classifyTriangle("3", 4, 5), 'InvalidInput', '"3",4,5 should be invalid because "3" is a string')
+
+    def test_non_integer_list(self):
+        self.assertEqual(classifyTriangle([3], 4, 5), 'InvalidInput', '[3],4,5 should be invalid because [3] is a list')
+
 
 if __name__ == '__main__':
     print('Running unit tests')
